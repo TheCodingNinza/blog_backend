@@ -1,0 +1,64 @@
+allprojects {
+    group = 'com.saurabhsameer'
+}
+
+subprojects {
+
+    apply plugin: 'java-library'
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+
+    ext {
+        javaVersion = JavaVersion.VERSION_17
+    }
+    repositories {
+        mavenCentral()
+    }
+    sourceCompatibility = project.property('javaVersion');
+    targetCompatibility = project.property('javaVersion');
+
+
+    java {
+        withJavadocJar()
+        withSourcesJar()
+    }
+
+    dependencies {
+        implementation platform("org.springframework.boot:spring-boot-dependencies:3.1.2")
+    }
+
+}
+
+project(':application') {
+    dependencies {
+        implementation project(':service')
+        implementation project(':entryway')
+        implementation project(':data-access')
+        implementation project(':configuration')
+    }
+}
+project(':configuration') {
+    dependencies {
+        implementation project(':service')
+        implementation project(':entryway')
+        implementation project(':data-access')
+
+    }
+}
+project(':data-access') {
+    dependencies {
+        implementation project(':service')
+    }
+}
+
+project(':entryway') {
+    dependencies {
+        implementation project(':service')
+    }
+}
+
+project(':service'){
+    dependencies {
+
+    }
+}

@@ -1,0 +1,7 @@
+rootProject.name = 'blog_backend'
+include 'configuration'
+include 'application'
+include 'service'
+include 'data-access'
+include 'entryway'
+
